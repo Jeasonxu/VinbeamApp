@@ -1,0 +1,53 @@
+
+
+.stats-snapshot{
+  .stat-title{
+    width: 100%;
+    height: 2em;
+    background-color: rgb(129, 101, 190);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 20px;
+    padding: 5px 0px 0px 10px;
+    color: white;
+  }
+  .stat{
+    width: 100%;
+    height: 120px;
+    background-color: rgb(129, 80, 190);
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    margin: 0 auto;
+  }
+}
+
+.stats-snapshot-big{
+  .stat-title{
+    width: 100%;
+    height: 30px;
+    background-color: #EC7E7E;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 20px;
+    padding: 5px 0px 0px 10px;
+    color: white;
+  }
+  .stat{
+    width: 100%;
+    height: 120px;
+    background-color: #E75A5A;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    margin: 0 auto;
+  }
+}
+
+#map{
+  margin-top: 50px;
+  height: 500px;
+  width: 100%;
+}
+
+// #map-container{
+//   padding: 10px;
+// }

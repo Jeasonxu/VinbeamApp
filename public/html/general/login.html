@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+    <div id="loginForm" class="animated fadeInDown">
+      <div class="row">
+        <div class="col-xs-12">
+          <form name="myForm" novalidate>
+            <fieldset>
+              <div class="row">
+                <h1 class="title">{{formState}}</h1>
+              </div>
+              <hr/>
+              <div class="fields">
+                <div ng-if="!loginForm" class="row input">
+                  <label class="col-xs-12 col-sm-4 control-label">Full Name</label>
+                  <div class="col-xs-12 col-sm-4">
+                    <input type="text" name="fullName" ng-model="user.fullName" size="31" required  placeholder="Full Name">
+                  </div>
+                </div>
+                <div class="row input">
+                  <label  class="col-xs-12 col-sm-4 control-label">Username</label>
+                  <div class="col-xs-12 col-sm-4">
+                    <input type="text" name="userName" ng-model="user.username" size="31" required placeholder="Username">
+                  </div>
+                </div>
+                <div ng-if="!loginForm" class="row input">
+                  <label class="col-xs-12 col-sm-4 control-label">Email</label>
+                  <div class="col-xs-12 col-sm-4">
+                    <input type="text" name="email" ng-model="user.email" size="31" required placeholder="Email">
+                  </div>
+                </div>
+                <div class="row input">
+                  <label class="col-xs-12 col-sm-4">Password</label>
+                  <div class="col-xs-12 col-sm-4">
+                    <input type="password" name="password" ng-model="user.password" size="31" required placeholder="Password">
+                  </div>
+                </div>
+                <div class="row input">
+                  <p>Forgot Password? <a href="#">reset your password</a></p>
+                </div>
+              </div>
+              <div class="row buttons">
+                <div class="col-sm-offset-4 col-sm-4 text-center button">
+                  <button class="button btn-primary btn" ng-click="login(user)">Submit</button>
+                </div>
+              </div>
+              <div class="row buttons">
+                <div class="col-sm-offset-4 col-sm-4 text-center button">
+                  <button class="button btn-default btn animated" ng-click="switchFormView()">{{otherState}}</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

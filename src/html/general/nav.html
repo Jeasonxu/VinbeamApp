@@ -1,0 +1,31 @@
+<nav ng-controller="NavController" class="navbar navbar-custom">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <img class="navbar-brand" src="assets/VINbealogo-word.png" alt="" style="margin-left: 50px">
+
+      <div id="nav-icon3" ng-click="animateHamburger()" class="open">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li id="loginButton" ng-show="!loggedIn"><a ui-sref="login">Login</a></li>
+        <li id="profileButton" ng-show="loggedIn" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser.firstname}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Edit Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" ng-click="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
