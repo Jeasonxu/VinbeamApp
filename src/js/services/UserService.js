@@ -2,9 +2,26 @@
 
 app.factory('UserService', ['$window', '$http', 'tokenStorageKey', '$resource', 'api', ($window, $http, tokenStorageKey, $resource, api) => {
   return {
-    session: $resource(`${api}/sessions`),
-    users: $resource(`${api}/users/:uid`, {}, {
-      query: {method:'GET',isArray:false}
+    session: $resource(`${api}/sessions`, {}, {
+      establish: {
+        method: 'POST',
+        isArray: false,
+        headers:{'Content-Type':'application/json'}
+      }
+    }),
+    users: $resource(`${api}/users`, {}, {
+      query: {
+        method:'GET',
+        isArray: false,
+        headers:{'Content-Type':'application/json'}
+      }
+    }),
+    customers: $resource(`${api}/customers`, {}, {
+      create: {
+        method: 'POST',
+        isArray: false,
+        headers: {'Content-Type':'application/json'}
+      }
     }),
     findUser: (usersArray, username) => {
       let currentUser;

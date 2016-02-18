@@ -12,14 +12,18 @@ app.controller('AuthController', ['$rootScope','$scope','$state', '$window', 'Au
 
   $scope.login = (user) => {
     $scope.$emit('loading');
-    UserService.session.save({}, user, (data) => {
+    UserService.session.establish(user, (data) => {
       $scope.$emit('finished');
       swal({ title: "Success!", text: "redirecting...", timer: 1500, showConfirmButton: false, type: 'success'});
       $scope.loggedIn = !$scope.loggedIn;
-      $state.go('dashboard');
       UserService.users.query().$promise.then(data => {
         let currentUser = UserService.findUser(data._embedded.users, user.username);
         AuthService.saveJWT(currentUser);
+        if(currentUser.role === "ROLE_SUPERUSER"){
+          $state.go('super.dashboard');
+        } else {
+          $state.go('dashboard');
+        }
       });
     });
   }

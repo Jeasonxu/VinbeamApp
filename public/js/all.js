@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('vinbeam', ['ui.router', 'ngAnimate', 'ngResource', 'ngStorage']);
+var app = angular.module('vinbeam', ['ui.router', 'ngAnimate', 'ngResource', 'ngStorage', 'ui.bootstrap']);
 
 app.constant('tokenStorageKey', 'my-token');
 app.constant('api', "http://localhost:3000/api");
@@ -25,11 +25,11 @@ app.run(['$rootScope', '$state', 'AuthService', function ($rootScope, $state, Au
   });
 }]);
 
-app.config(["$stateProvider", "$locationProvider", "$urlRouterProvider", "$httpProvider", function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
+app.config(["$stateProvider", "$locationProvider", "$urlRouterProvider", '$resourceProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $resourceProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
-  // $httpProvider.useApplyAsync(true);
+  $resourceProvider.defaults.stripTrailingSlashes = false;
 
-  $stateProvider.state('landing', { url: '/', templateUrl: '/html/general/landing.html', controller: 'LandingController' }).state('login', { url: '/login', templateUrl: '/html/general/login.html', controller: 'AuthController' }).state('about', { url: '/about', templateUrl: '/html/about.html', controller: 'AboutController' }).state('dashboard', { url: '/dashboard', templateUrl: '/html/dashboard.html', controller: 'DashController' }).state('vehicles', { url: '/vehicles', templateUrl: '/html/vehicles.html', controller: 'VehiclesController' });
+  $stateProvider.state('landing', { url: '/', templateUrl: '/html/general/landing.html', controller: 'LandingController' }).state('login', { url: '/login', templateUrl: '/html/general/login.html', controller: 'AuthController' }).state('dashboard', { url: '/dashboard', templateUrl: '/html/dashboard.html', controller: 'DashController' }).state('vehicles', { url: '/vehicles', templateUrl: '/html/vehicles.html', controller: 'VehiclesController' }).state('events', { url: '/events', templateUrl: '/html/events.html', controller: 'EventsController' }).state('super', { url: '/super', templateUrl: '/html/super.html' }).state('super.dashboard', { url: '/dashboard', templateUrl: '/html/partials/dashboard.html', controller: 'SuperController' });
 
   $urlRouterProvider.otherwise('/');
 }]);
@@ -48,14 +48,18 @@ app.controller('AuthController', ['$rootScope', '$scope', '$state', '$window', '
 
   $scope.login = function (user) {
     $scope.$emit('loading');
-    UserService.session.save({}, user, function (data) {
+    UserService.session.establish(user, function (data) {
       $scope.$emit('finished');
       swal({ title: "Success!", text: "redirecting...", timer: 1500, showConfirmButton: false, type: 'success' });
       $scope.loggedIn = !$scope.loggedIn;
-      $state.go('dashboard');
       UserService.users.query().$promise.then(function (data) {
         var currentUser = UserService.findUser(data._embedded.users, user.username);
         AuthService.saveJWT(currentUser);
+        if (currentUser.role === "ROLE_SUPERUSER") {
+          $state.go('super.dashboard');
+        } else {
+          $state.go('dashboard');
+        }
       });
     });
   };
@@ -90,6 +94,9 @@ app.controller('DashController', ['$scope', '$window', 'DashService', 'AuthServi
     console.log(AuthService.data.loggedInUser);
   };
 }]);
+'use strict';
+
+app.controller('EventsController', ['$scope', '$window', 'DashService', 'AuthService', function ($scope, $window, DashService, AuthService) {}]);
 'use strict';
 
 app.controller('LandingController', ['$scope', '$window', function ($scope, $window) {}]);
@@ -138,6 +145,41 @@ app.controller('NavController', ['$rootScope', '$scope', '$state', '$window', 'A
   for (var i = 0; i < elems.length; i++) {
     elems[i].addEventListener('click', makeActive);
   }
+}]);
+'use strict';
+
+app.controller('SuperController', ['$scope', '$window', 'UserService', function ($scope, $window, UserService) {
+  $scope.$emit('enterState');
+  UserService.users.query().$promise.then(function (data) {
+    $scope.users = data._embedded.users;
+  });
+
+  var makeMap = function makeMap() {
+    if (document.getElementById('super-map')) {
+      var useragent = navigator.userAgent;
+      var mapdiv = document.getElementById("super-map");
+
+      var myLatlng = new google.maps.LatLng(47.609, -122.333);
+      var mapOptions = {
+        zoom: 8,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      new google.maps.Map(mapdiv, mapOptions);
+    }
+  };
+
+  $scope.$on('$viewContentLoaded', function () {
+    makeMap();
+  });
+
+  $scope.createCustomer = function (customer) {
+    console.log(customer);
+    // UserService.customers.create(customer, (data) => {
+    //
+    // })
+  };
 }]);
 'use strict';
 
@@ -203,9 +245,26 @@ app.factory('DashService', ['$window', '$http', 'api', function ($window, $http,
 
 app.factory('UserService', ['$window', '$http', 'tokenStorageKey', '$resource', 'api', function ($window, $http, tokenStorageKey, $resource, api) {
   return {
-    session: $resource(api + '/sessions'),
-    users: $resource(api + '/users/:uid', {}, {
-      query: { method: 'GET', isArray: false }
+    session: $resource(api + '/sessions', {}, {
+      establish: {
+        method: 'POST',
+        isArray: false,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    }),
+    users: $resource(api + '/users', {}, {
+      query: {
+        method: 'GET',
+        isArray: false,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    }),
+    customers: $resource(api + '/customers', {}, {
+      create: {
+        method: 'POST',
+        isArray: false,
+        headers: { 'Content-Type': 'application/json' }
+      }
     }),
     findUser: function findUser(usersArray, username) {
       var currentUser = undefined;
