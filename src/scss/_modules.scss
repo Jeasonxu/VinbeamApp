@@ -1,0 +1,157 @@
+.list-animate-container {
+    background: #ececec;
+    list-style:none;
+    margin:0;
+    padding:0 10px;
+    li a {
+      display: block;
+    }
+    .right{
+      float: right;
+    }
+}
+
+.animate-repeat {
+    line-height:40px;
+    list-style:none;
+    /*box-sizing:border-box;*/
+    border-bottom: 1px solid white;
+    -webkit-transition: .1s linear all;
+    transition: .1s linear all;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+    -webkit-transition:all linear 0.2s;
+    transition:all linear 0.2s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+    opacity:0;
+    max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+    opacity:1;
+    max-height:40px;
+}
+
+/**
+ * Stagger Leave (hide) animation
+ */
+// .animate-repeat.ng-leave-stagger {
+//     /* this will have a 100ms delay between each successive leave animation */
+//     -webkit-transition-delay: 0.1s;
+//     transition-delay: 0.1s;
+//
+//     /* in case the stagger doesn't work then these two values
+//      must be set to 0 to avoid an accidental CSS inheritance */
+//     -webkit-transition-duration: 0s;
+//     transition-duration: 0s;
+// }
+
+/**
+ * Stagger ENTER ANIMATION
+ */
+.animate-repeat.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive enter animation */
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+
+.form-search{
+  margin-top: 20px;
+}
+
+.module_info_container{
+  margin-left: 0px;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  .car_icon{
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: #f2f2f2;
+    float: right;
+  }
+  .info_list li{
+    list-style: none;
+  }
+  .list-group{
+    min-width: 255px;
+  }
+}
+
+.paginate-section{
+  margin-top: 20px;
+  .paginate_button{
+    width: 100px;
+    height: 30px;
+    background-color: $secondary-color;
+    border: $secondary-color;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+  }
+  .page_counter{
+    font-size: 15px;
+  }
+}
+
+#module_map{
+  width: 100%;
+  min-height: 385px;
+  min-width: 255px;
+}
+
+.module-stat-title{
+  width: 100%;
+  height: 2em;
+  background-color: rgb(255, 220, 37);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-top: 20px;
+  padding: 5px 0px 0px 10px;
+  color: white;
+}
+
+.module-stat{
+    width: 100%;
+    height: 60px;
+    background-color: $secondary-color;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    margin: 0 auto;
+    .module_active_img{
+      height: 50px;
+      width: 50px;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
+    .module_active_count{
+      font-size: 40px;
+      margin-left: 10px;
+      color: white;
+    }
+}
+
+.store-dropdown{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-search{
+  height: 250px;
+}

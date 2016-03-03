@@ -1,0 +1,103 @@
+<div id="page-heading">
+  <ol class=" section-title breadcrumb">
+    <li><a ui-sref="dashboard">Dashboard</a></li>
+    <li>Modules</li>
+  </ol>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <div class="stats-snapshot row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="module-stat-title">
+          <p>ACTIVE MODULES</p>
+        </div>
+        <div class="module-stat">
+          <img class="module_active_img" src="assets/online.png" alt="">
+          <span class="module_active_count">{{activeModules}}</span>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="module-stat-title">
+          <p>INACTIVE MODULES</p>
+        </div>
+        <div class="module-stat">
+          <img class="module_active_img" src="assets/offline.png" alt="">
+          <span class="module_active_count">{{inactiveModules}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="form-search">
+            <!--INPUT TEXT-->
+            <div class="input-append">
+              <input type="text" ng-model="search"
+                     placeholder="Filter modules"
+                     class="form-control" >
+            </div>
+            <!--LIST-->
+            <ul class="list-animate-container">
+              <li class="animate-repeat" ng-repeat="module in displayModules | filter:search">
+                <a href="#" ng-click="displayModule(module)"><span><img src="/assets/module.png" alt=""></span> VIN: {{module.info.vin}} <span class="right">Active: {{module.info.active}} </span></a>
+              </li>
+           </ul>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="paginate-section">
+          <button class="paginate_button" ng-disabled="currentPage === 1" ng-click="previousPage()">Previous</button>
+          <span class="page_counter">{{currentPage}}/{{page_num}}</span>
+          <button class="paginate_button" ng-disabled="page_num === currentPage" ng-click="nextPage()">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-12">
+    <div class="module_info_container row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <ul class="list-group">
+          <a href="#" class="list-group-item">Store: {{selectedModule.storeId}}</a>
+          <a href="#" class="list-group-item">Vehicle:  {{selectedModule.info.vin}}</a>
+          <li class="list-group-item">
+            INFO
+            <div class="info_list">
+                <b>Active:</b><span ng-class="selectedModule.info.active ? 'background-green' : 'background-red'"class="right stat-box"> {{selectedModule.info.active ? "Yes" : "No"}}</span>
+                <br/>
+                <b>Moving:</b><span ng-class="selectedModule.info.moving ? 'background-green' : 'background-red'" class="right stat-box"> {{selectedModule.info.moving ? "Yes" : "No"}}</span>
+                <br/>
+                <b>Battery Volts:</b><span class="right"> {{selectedModule.info.batteryVolts}}</span>
+                <br/>
+                <b>Fuel Level Percent:</b><span class="right"> {{selectedModule.info.fuelLevelPercent}}</span>
+                <br/>
+                <b>Odometer:</b><span class="right"> {{selectedModule.info.odometer}}</span>
+                <br/>
+                <b>Version:</b><span class="right"> {{selectedModule.version}}</span>
+                <br/>
+            </div>
+          </li>
+          <li class="list-group-item">
+            HISTORY
+            <div class="info_list">
+                <b>Made:</b><span class="right"> {{selectedModule.builtDate |  date:'short' }}</span>
+                <br/>
+                <b>Sold:</b><span class="right"> {{selectedModule.soldDate |  date:'short' }}</span>
+                <br/>
+                <b>Installed:</b><span class="right"> {{selectedModule.history.installedDate |  date:'short' }}</span>
+                <br/>
+                <b>Last Active</b><span class="right"> {{selectedModule.history.lastActiveDate |  date:'short' }}</span>
+                <br/>
+                <b>Last Moved</b><span class="right"> {{selectedModule.history.lastMovedDate |  date:'short' }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div id="module_map">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

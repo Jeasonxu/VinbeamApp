@@ -1,3 +1,11 @@
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+
+*:focus{
+  outline: none;
+}
+
 [ui-view].ng-enter, [ui-view].ng-leave {
   position: absolute;
   left: 0;
@@ -21,15 +29,46 @@
   opacity: 0;
   /*padding-left: 100px;*/ }
 
+
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+
 .section-title{
-  margin-top: -20px;
+  @include drop-shadow(grey);
   h1{
-    padding: 0px 0px 10px 15px;
+    padding: 10px;
     font-size: 20px;
     color: $secondary-color;
   }
 }
 
-.nav, .pagination, .carousel, .panel-title a {
-  cursor: pointer;
+.right{
+  float: right;
+}
+
+.stat-box{
+  padding: 0px 3px 0px 3px;
+  border-radius: 3px;
+}
+
+.background-green{
+  background-color: green;
+  color: white;
+}
+
+.background-red{
+  background-color: red;
+  color: white;
+}
+
+.background-info{
+  background-color: $secondary-color;
+  color: white;
+}
+
+.background-green{
+  background-color: green;
+  color: white;
 }

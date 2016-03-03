@@ -1,7 +1,5 @@
 
 app.controller('NavController', ['$rootScope','$scope','$state', '$window', 'AuthService', 'UserService', ($rootScope, $scope, $state, $window, AuthService, UserService) => {
-  $scope.loggedIn = AuthService.isLoggedIn();
-  $scope.currentUser = AuthService.returnUser();
 
   $("#wrapper").removeClass("toggled");
   $('#nav-icon3').removeClass('open');
@@ -20,7 +18,11 @@ app.controller('NavController', ['$rootScope','$scope','$state', '$window', 'Aut
   $scope.$on('newState', () => {
     setTimeout(() => {
       $scope.$apply(() => {
-        $scope.loggedIn = AuthService.returnUser();
+        $scope.loggedIn = AuthService.isLoggedIn();
+        if(!$scope.loggedIn){
+          $state.go('login');
+        }
+        $scope.currentUser = $rootScope.currentUser;
       })
     }, 1000)
   })

@@ -1,5 +1,7 @@
 
-app.controller('EventsController', ['$scope', '$window', 'DashService', 'AuthService', ($scope, $window, DashService, AuthService) => {
-
+app.controller('EventsController', ['$scope', '$window', 'VinbeamService', ($scope, $window, VinbeamService) => {
+  VinbeamService.events.query().$promise.then((res) => {
+    console.log(res);
+  })
 
 }])

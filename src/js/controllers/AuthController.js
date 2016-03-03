@@ -1,7 +1,8 @@
 
-app.controller('AuthController', ['$rootScope','$scope','$state', '$window', 'AuthService', 'UserService', ($rootScope, $scope, $state, $window, AuthService, UserService) => {
+app.controller('AuthController', ['$rootScope','$scope','$state', '$window', 'UserService', '$sessionStorage', ($rootScope, $scope, $state, $window, UserService, $sessionStorage) => {
   $scope.loginForm = false;
   $scope.formState = "Login";
+  $scope.$storage = $sessionStorage;
   // $scope.currentUser;
 
   ($scope.switchFormView = () => {
@@ -18,11 +19,12 @@ app.controller('AuthController', ['$rootScope','$scope','$state', '$window', 'Au
       $scope.loggedIn = !$scope.loggedIn;
       UserService.users.query().$promise.then(data => {
         let currentUser = UserService.findUser(data._embedded.users, user.username);
-        AuthService.saveJWT(currentUser);
+        $scope.$storage._id = currentUser.id;
+        $scope.$storage._timeStamp = Date.now();
         if(currentUser.role === "ROLE_SUPERUSER"){
-          $state.go('super.dashboard');
+          $state.go('super.dashboard', {}, { reload: true });
         } else {
-          $state.go('dashboard');
+          $state.go('dashboard', {}, { reload: true });
         }
       });
     });

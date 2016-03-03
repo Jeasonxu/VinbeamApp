@@ -1,7 +1,6 @@
 
-app.controller('DashController', ['$scope', '$window', 'DashService', 'AuthService', ($scope, $window, DashService, AuthService) => {
+app.controller('DashController', ['$scope', '$window', 'DashService', ($scope, $window, DashService) => {
   $scope.$emit('enterState')
-  // console.log("dashboard: ", AuthService.data.loggedInUser);
 
   let makeMap = () => {
     if(document.getElementById('map')){
@@ -22,10 +21,6 @@ app.controller('DashController', ['$scope', '$window', 'DashService', 'AuthServi
   $scope.$on('$viewContentLoaded', () => {
     makeMap();
   });
-
-  $scope.getUser = () => {
-    console.log(AuthService.data.loggedInUser);
-  }
 
 
 }])

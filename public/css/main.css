@@ -1,3 +1,9 @@
+* {
+  font-family: 'Open Sans', sans-serif; }
+
+*:focus {
+  outline: none; }
+
 [ui-view].ng-enter, [ui-view].ng-leave {
   position: absolute;
   left: 0;
@@ -21,15 +27,40 @@
   opacity: 0;
   /*padding-left: 100px;*/ }
 
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer; }
+
 .section-title {
-  margin-top: -20px; }
+  -webkit-box-shadow: 0px 4px 10px -1px grey;
+  -moz-box-shadow: 0px 4px 10px -1px grey;
+  box-shadow: 0px 4px 10px -1px grey; }
   .section-title h1 {
-    padding: 0px 0px 10px 15px;
+    padding: 10px;
     font-size: 20px;
     color: #4099de; }
 
-.nav, .pagination, .carousel, .panel-title a {
-  cursor: pointer; }
+.right {
+  float: right; }
+
+.stat-box {
+  padding: 0px 3px 0px 3px;
+  border-radius: 3px; }
+
+.background-green {
+  background-color: green;
+  color: white; }
+
+.background-red {
+  background-color: red;
+  color: white; }
+
+.background-info {
+  background-color: #4099de;
+  color: white; }
+
+.background-green {
+  background-color: green;
+  color: white; }
 
 #wrapper {
   position: relative;
@@ -365,3 +396,149 @@ fieldset .input {
   position: relative;
   width: 100%;
   height: 400px; }
+
+.list-animate-container {
+  background: #ececec;
+  list-style: none;
+  margin: 0;
+  padding: 0 10px; }
+  .list-animate-container li a {
+    display: block; }
+  .list-animate-container .right {
+    float: right; }
+
+.animate-repeat {
+  line-height: 40px;
+  list-style: none;
+  /*box-sizing:border-box;*/
+  border-bottom: 1px solid white;
+  -webkit-transition: .1s linear all;
+  transition: .1s linear all; }
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s; }
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity: 0;
+  max-height: 0; }
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity: 1;
+  max-height: 40px; }
+
+/**
+ * Stagger Leave (hide) animation
+ */
+/**
+ * Stagger ENTER ANIMATION
+ */
+.animate-repeat.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive enter animation */
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+  /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s; }
+
+.form-search {
+  margin-top: 20px; }
+
+.module_info_container {
+  margin-left: 0px;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px; }
+  .module_info_container .car_icon {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: #f2f2f2;
+    float: right; }
+  .module_info_container .info_list li {
+    list-style: none; }
+  .module_info_container .list-group {
+    min-width: 255px; }
+
+.paginate-section {
+  margin-top: 20px; }
+  .paginate-section .paginate_button {
+    width: 100px;
+    height: 30px;
+    background-color: #4099de;
+    border: #4099de;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px; }
+  .paginate-section .page_counter {
+    font-size: 15px; }
+
+#module_map {
+  width: 100%;
+  min-height: 385px;
+  min-width: 255px; }
+
+.module-stat-title {
+  width: 100%;
+  height: 2em;
+  background-color: #ffdc25;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-top: 20px;
+  padding: 5px 0px 0px 10px;
+  color: white; }
+
+.module-stat {
+  width: 100%;
+  height: 60px;
+  background-color: #4099de;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 0 auto; }
+  .module-stat .module_active_img {
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    margin-bottom: 15px; }
+  .module-stat .module_active_count {
+    font-size: 40px;
+    margin-left: 10px;
+    color: white; }
+
+.store-dropdown {
+  margin-top: 20px;
+  text-align: center; }
+
+.form-search {
+  height: 250px; }
+
+#vehicles_list {
+  height: 600px;
+  margin-top: 20px; }
+
+.select_box {
+  margin-top: 20px;
+  background-color: #4099de;
+  padding: 0px 10px 10px 10px;
+  border-radius: 5px;
+  color: white;
+  -webkit-box-shadow: 0px 4px 10px -1px #bababa;
+  -moz-box-shadow: 0px 4px 10px -1px #bababa;
+  box-shadow: 0px 4px 10px -1px #bababa; }
+
+#vehicle_map {
+  width: 100%;
+  height: 300px; }
+
+.vehicle_info_section {
+  margin-top: 20px; }
+
+.back-button {
+  margin-bottom: 10px; }

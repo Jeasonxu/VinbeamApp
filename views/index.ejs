@@ -15,7 +15,6 @@
     <meta property=”og:description” content="Making dealership management better"/>
     <title>VINBeam App</title>
     <link rel="stylesheet" href="/vendor/animate.css/animate.min.css">
-    <!-- <link rel="stylesheet" href="/vendor/angular-bootstrap/ui-bootstrap-csp.css"> -->
     <link rel="stylesheet" href="/vendor/sweetalert/dist/sweetalert.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
@@ -32,7 +31,20 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li>
+                        <a ng-if="currentUser.role === 'ROLE_SUPERUSER'" ui-sref="super.dashboard">Admin Dashboard</a>
+                    </li>
+                    <li>
+                        <a ng-if="currentUser.role === 'ROLE_SUPERUSER'" ui-sref="">Stores</a>
+                    </li>
+                    <li>
+                        <a ng-if="currentUser.role === 'ROLE_SUPERUSER'" ui-sref="">Modules</a>
+                    </li>
+                    <hr ng-if="currentUser.role === 'ROLE_SUPERUSER'"/>
+                    <li>
                         <a ui-sref="dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                        <a ui-sref="modules">Modules</a>
                     </li>
                     <li>
                         <a ui-sref="vehicles">Vehicles</a>
@@ -72,6 +84,7 @@
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="/vendor/ngstorage/ngStorage.min.js"></script>
+    <script src="/vendor/angular-smart-table/dist/smart-table.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiwnXyWSJgIPbye3oYcgw_2HG0rQdHAIc&callback=initMap"
     type="text/javascript"></script>
     <script src="/vendor/sweetalert/dist/sweetalert.min.js"></script>

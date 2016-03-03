@@ -1,6 +1,9 @@
 
-app.controller('SuperController', ['$scope', '$window', 'UserService', ($scope, $window, UserService) => {
-  $scope.$emit('enterState')
+app.controller('SuperController', ['$scope', '$window', 'UserService', '$http', 'api', ($scope, $window, UserService, $http, api) => {
+  $scope.$emit('enterState');
+
+
+  $scope.users = [];
   UserService.users.query().$promise.then(data => {
     $scope.users = data._embedded.users;
   });
@@ -26,10 +29,15 @@ app.controller('SuperController', ['$scope', '$window', 'UserService', ($scope, 
   });
 
   $scope.createCustomer = (customer) => {
-    console.log(customer);
-    // UserService.customers.create(customer, (data) => {
-    //
-    // })
+    UserService.customers.create({
+      "name": "Sawgrass Ford",
+      "address": "123 Main Street, USA",
+      "domain": "sawgrassford.com"
+     }, (data) => {
+      console.log(data);
+    })
   }
+
+   $scope.itemsByPage = 5;
 
 }])

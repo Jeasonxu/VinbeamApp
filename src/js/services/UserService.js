@@ -6,30 +6,40 @@ app.factory('UserService', ['$window', '$http', 'tokenStorageKey', '$resource', 
       establish: {
         method: 'POST',
         isArray: false,
-        headers:{'Content-Type':'application/json'}
+        withCredentials: true,
+        headers:  {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
       }
     }),
-    users: $resource(`${api}/users`, {}, {
+    users: $resource(`${api}/users/:userId`, {userId: '@userId'}, {
       query: {
         method:'GET',
         isArray: false,
-        headers:{'Content-Type':'application/json'}
+        withCredentials: true,
+        headers:  {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
       }
     }),
     customers: $resource(`${api}/customers`, {}, {
       create: {
         method: 'POST',
         isArray: false,
-        headers: {'Content-Type':'application/json'}
+        withCredentials: true,
+        headers:  {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
       }
     }),
     findUser: (usersArray, username) => {
       let currentUser;
       usersArray.forEach((user, i) => {
-        if(user.username === username){
+        if(user.username.toString() === username.toString()){
           currentUser = user;
-        } else {
-          currentUser = null;
         }
       })
       return currentUser;

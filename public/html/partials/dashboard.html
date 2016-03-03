@@ -12,8 +12,7 @@
     <table class="table">
       <thead>
          <tr>
-           <th>Lastname</th>
-           <th>Firstname</th>
+           <th>Username</th>
            <th>Role</th>
          </tr>
        </thead>
@@ -22,9 +21,8 @@
         <div class="panel panel-default" ng-repeat="user in users track by $index">
           <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}">
             <div class="panel-heading row">
-              <div class="col-md-4">{{user.lastname}}</div>
-              <div class="col-md-4">{{user.firstname}}</div>
-              <div class="col-md-4">{{user.role}}</div>
+              <div class="col-md-6">{{user.username}}</div>
+              <div class="col-md-6">{{user.role}}</div>
             </div>
           </a>
             <div id="{{$index}}" class="panel-collapse collapse in">
@@ -41,6 +39,40 @@
     <div class="row well">
       <div id="super-map"></div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table st-table="users" st-safe-src="customers" class="table table-striped">
+		<thead>
+		<tr>
+			<th st-sort="firstName">first name</th>
+			<th st-sort="lastName">last name</th>
+			<th st-sort="birthDate">username</th>
+			<th st-sort="balance">role</th>
+		</tr>
+		<tr>
+			<th colspan="12">
+				<input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="user in users">
+			<td>{{user.firstName}}</td>
+			<td>{{user.lastName}}</td>
+			<td>{{user.birthDate}}</td>
+			<td>{{user.balance}}</td>
+		</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="5" class="text-center">
+					<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
   </div>
 </div>
 

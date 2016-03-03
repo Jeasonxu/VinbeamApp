@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 @import "general";
 @import "side-nav";
 @import "login";
@@ -7,3 +8,6 @@
 @import "dashboard";
 @import "loader";
 @import "superdash";
+@import "modules.scss";
+@import "vehicles";
+@import "vehicle";
